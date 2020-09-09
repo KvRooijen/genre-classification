@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# database files
+packages/genre_classifier/genre_classifier/datasets/genres/*/*.wav
