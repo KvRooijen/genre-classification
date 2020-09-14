@@ -1,0 +1,5 @@
+# api
+flask==1.0.2
+
+# local genre_classifier package
+-e "C:\Users\keesv\Documents\Udemy\ML-deploy\genre_classification\packages\genre_classifier"
