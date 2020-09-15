@@ -1,5 +1,5 @@
 from genre_classifier.config import config as model_config
-from genre_classifier.processing.data_management import load_dataset
+from genre_classifier.processing.data_management import load_dataset, close_dataset
 from genre_classifier import __version__ as _version
 
 import json
@@ -30,7 +30,7 @@ def test_prediction_endpoint_returns_prediction(flask_test_client):
     # This is important as it makes it harder for the test
     # data versions to get confused by not spreading it
     # across packages.
-    test_data, test_labels = load_dataset(base_path=model_config.DATASET_DIR)
+    test_data, test_labels = load_dataset(dataset_folder=model_config.DATASET_TEST_DIR)
 
     # When
     data = {}
@@ -39,6 +39,9 @@ def test_prediction_endpoint_returns_prediction(flask_test_client):
     response = flask_test_client.post('/v1/predict/knn',
                                       data=data,
                                       content_type='multipart/form-data')#
+    close_dataset(data=test_data)
+
+
     # Then
     assert response.status_code == 200
 
@@ -46,5 +49,5 @@ def test_prediction_endpoint_returns_prediction(flask_test_client):
     prediction = response_json['predictions']
     response_version = response_json['version']
 
-    assert prediction == ['metal', 'country']
+    assert prediction == ['disco', 'rock']
     assert response_version == _version

@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 def test_make_single_prediction():
     # Given
-    test_data, test_labels = load_dataset(base_path=config.DATASET_DIR)
+    test_data, test_labels = load_dataset(dataset_folder = config.DATASET_TEST_DIR)
 
     # When
     subject = make_prediction(input_data = test_data[:1])
@@ -21,4 +21,4 @@ def test_make_single_prediction():
     assert isinstance(subject['predictions'], np.ndarray)
 
     # close data
-    close_dataset(test_data)
+    close_dataset(data=test_data)

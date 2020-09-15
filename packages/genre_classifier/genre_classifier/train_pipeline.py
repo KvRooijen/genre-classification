@@ -12,7 +12,7 @@ _logger = logging.getLogger('genre_classifier')
 def run_training() -> None:
 
     # read training data
-    data_X, data_y = load_dataset(base_path=config.DATASET_DIR)
+    data_X, data_y = load_dataset(dataset_folder = config.DATASET_TRAIN_DIR)
 
     # divide train and test
     X_train, X_test, y_train, y_test = train_test_split(

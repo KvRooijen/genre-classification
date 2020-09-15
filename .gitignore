@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # database files
-packages/genre_classifier/genre_classifier/datasets/genres/*/*.wav
+packages/genre_classifier/genre_classifier/datasets/*/*.wav

@@ -15,15 +15,15 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-def load_dataset(*, base_path: str) -> Tuple[List[BinaryIO], List[str]]:
+def load_dataset(*, dataset_folder: str) -> Tuple[List[BinaryIO], List[str]]:
     X, y = [], []
-    genres = os.listdir(base_path)
-    for genre in genres:
-        genre_path = os.path.join(base_path, genre)
-        file_paths = os.listdir(genre_path)
-        for file_path in file_paths:
-            X += [open(os.path.join(genre_path, file_path), 'rb')]
-            y += [genre]
+    files = os.listdir(dataset_folder)
+
+    for file_path in files:
+        genre = file_path.split('.')[0]
+        X += [open(os.path.join(dataset_folder, file_path), 'rb')]
+        y += [genre]
+    
     return X,y
 
 def close_dataset(*, data:List[BinaryIO]) -> None:
