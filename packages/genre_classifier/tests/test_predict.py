@@ -2,7 +2,7 @@ import math
 import numpy as np
 
 from genre_classifier.predict import make_prediction
-from genre_classifier.processing.data_management import load_dataset, json_serialize
+from genre_classifier.processing.data_management import load_dataset, close_dataset
 
 from genre_classifier.config import config
 
@@ -19,3 +19,6 @@ def test_make_single_prediction():
     # Then
     assert subject is not None
     assert isinstance(subject['predictions'], np.ndarray)
+
+    # close data
+    close_dataset(test_data)
