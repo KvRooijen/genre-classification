@@ -1,7 +1,10 @@
 from flask import Blueprint, request, jsonify
 from genre_classifier.predict import make_prediction
+from genre_classifier import __version__ as _version
 
 from api.config import get_logger
+from api import __version__ as api_version
+
 
 _logger = get_logger(logger_name=__name__)
 
@@ -13,6 +16,12 @@ def health():
     if request.method == 'GET':
         _logger.info('health status OK')
         return 'ok'
+
+@prediction_app.route('/version', methods=['GET'])
+def version():
+    if request.method == 'GET':
+        return jsonify({'model_version': _version,
+                        'api_version': api_version})
 
 @prediction_app.route('/v1/predict/knn', methods=['POST'])
 def predict():
